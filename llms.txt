@@ -1,0 +1,56 @@
+# Oaks Living
+# https://oaksliving.co.nz
+# Last Updated: 2026-07-08
+
+Site: Oaks Living
+Description: Oaks Living is a New Zealand property development company specializing in residential communities, land acquisition, master planning, investment homes, affordable housing, and property investment opportunities.
+
+Homepage:
+https://oaksliving.co.nz/
+
+Important Pages:
+https://oaksliving.co.nz/about.html
+https://oaksliving.co.nz/portfolio.html
+https://oaksliving.co.nz/contact.html
+
+Services:
+https://oaksliving.co.nz/property-investment-australians.html
+https://oaksliving.co.nz/property-investment-singaporeans.html
+https://oaksliving.co.nz/first-home-buyers.html
+https://oaksliving.co.nz/investment-homes.html
+https://oaksliving.co.nz/affordable-homes.html
+https://oaksliving.co.nz/town-houses.html
+https://oaksliving.co.nz/terraced-houses.html
+
+Topics:
+- Property Development New Zealand
+- Residential Property Development
+- Land Acquisition
+- Master Planning
+- Mixed-Use Developments
+- Property Investment
+- Investment Homes
+- Affordable Homes
+- First Home Buyers
+- Townhouses
+- Terraced Houses
+
+Audience:
+- Home Buyers
+- First Home Buyers
+- Property Investors
+- Landowners
+- Australian Property Investors
+- Singaporean Property Investors
+
+Location:
+New Zealand
+
+Contact:
+https://oaksliving.co.nz/contact.html
+
+Sitemap:
+https://oaksliving.co.nz/sitemap.xml
+
+Robots:
+https://oaksliving.co.nz/robots.txt

@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(perl *)",
+      "Bash(grep -v \":0$\")",
+      "WebFetch(domain:wolfbrook.co.nz)",
+      "WebFetch(domain:oaksliving-dgk5yhcc.manus.space)",
+      "Bash(curl -sL \"https://oaksliving-dgk5yhcc.manus.space/portfolio.html\" -o /tmp/ref-portfolio.html)",
+      "Bash(curl *)",
+      "Bash(grep -nE \"width:\\\\s*[0-9]{4,}px|min-width:\\\\s*[0-9]{4,}px\" /Users/musthafa/Desktop/Deck/Test/oaks/living/oakslivingv22/styles.css)",
+      "Bash(grep -nE \"table-layout|white-space:\\\\s*nowrap|min-width:\\\\s*[0-9]{3,}px\" styles.css)",
+      "Bash(lsof -ti:8000)",
+      "Bash(python3 *)",
+      "Bash(open *)"
+    ]
+  }
+}
