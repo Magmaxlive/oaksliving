@@ -47,6 +47,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 </script>
 <style>
+    .subpage-hero .hero-content {
+        color: #fff;
+    }
+    .subpage-hero .hero-title {
+        color: #fff;
+    }
     .blog-listing {
         max-width: 1120px;
         margin: 0 auto;
@@ -98,11 +104,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         transform: translateY(-4px);
         box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
+    .blog-card-img-wrap {
+        position: relative;
+    }
     .blog-card-img {
         width: 100%;
         height: 220px;
         object-fit: cover;
         display: block;
+    }
+    .blog-card-date {
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+        background: rgba(0,0,0,0.65);
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 2px;
+        letter-spacing: 0.04em;
     }
     .blog-card-body {
         padding: 28px;
@@ -200,7 +221,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="subpage-hero">
         <img src="images/auckland_skyline_night.png" alt="Oaks Living Blog" class="subpage-hero-bg">
         <div class="hero-overlay"></div>
-        <div class="hero-content fade-up">
+        <div class="hero-content">
             <span class="about-hero-label">Insights &amp; Expertise</span>
             <h1 class="hero-title">The Oaks Living Blog</h1>
             <p class="hero-description">Expert guides on property development and investment across New Zealand.</p>
@@ -211,7 +232,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="blog-listing">
         <div class="blog-listing-header">
             <span class="section-label">Latest Articles</span>
-            <h1>Property Insights from Oaks Living</h1>
+            <h2>Property Insights from Oaks Living</h2>
             <p>Stay informed with expert guidance on property development, investment strategy, and community living in New Zealand.</p>
         </div>
 
@@ -219,11 +240,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <!-- Card 1 -->
             <a href="blog/property-development-new-zealand-auckland.html" class="blog-card">
-                <img
-                    src="images/contractor-worker-assembling-skeleton-steel-frame-2025-03-14-00-07-01-utc.jpg"
-                    alt="Complete Guide to Property Development in New Zealand"
-                    class="blog-card-img"
-                >
+                <div class="blog-card-img-wrap">
+                    <img
+                        src="images/contractor-worker-assembling-skeleton-steel-frame-2025-03-14-00-07-01-utc.jpg"
+                        alt="Complete Guide to Property Development in New Zealand"
+                        class="blog-card-img"
+                    >
+                    <span class="blog-card-date">17 July 2026</span>
+                </div>
                 <div class="blog-card-body">
                     <span class="blog-card-tag">Property Development</span>
                     <p class="blog-card-title">Complete Guide to Property Development in New Zealand &amp; Auckland</p>
@@ -234,11 +258,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <!-- Card 2 -->
             <a href="blog/property-investment-new-zealand.html" class="blog-card">
-                <img
-                    src="images/Strategic Locations.jpg"
-                    alt="How to Choose the Right Location for Property Investment in New Zealand"
-                    class="blog-card-img"
-                >
+                <div class="blog-card-img-wrap">
+                    <img
+                        src="images/Strategic Locations.jpg"
+                        alt="How to Choose the Right Location for Property Investment in New Zealand"
+                        class="blog-card-img"
+                    >
+                    <span class="blog-card-date">17 August 2026</span>
+                </div>
                 <div class="blog-card-body">
                     <span class="blog-card-tag">Property Investment</span>
                     <p class="blog-card-title">How to Choose the Right Location for Your Next Property Investment in New Zealand</p>
