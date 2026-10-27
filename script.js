@@ -631,22 +631,50 @@ function initializeLazyVideos() {
     lazyVideos.forEach((v) => observer.observe(v));
 }
 
-// Insights section Vimeo — play/pause based on scroll position
+// Insights section video — native <video> with lazy load + custom mute toggle
 function initVimeoBackground() {
-    const iframe = document.querySelector(".insights-card-video .vimeo-cover iframe");
-    if (!iframe || !window.Vimeo) return;
+    const cover = document.querySelector(".insights-card-video .vimeo-cover");
+    const video = cover && cover.querySelector(".insights-video-el");
+    const source = video && video.querySelector("source[data-src]");
+    if (!cover || !video || !source) return;
 
-    const player = new Vimeo.Player(iframe);
+    const muteBtn = cover.querySelector(".vimeo-mute-btn");
+    if (muteBtn) {
+        muteBtn.addEventListener("click", () => {
+            const nextMuted = !video.muted;
+            video.muted = nextMuted;
+            if (!nextMuted) video.volume = 1;
+            muteBtn.setAttribute("aria-pressed", String(nextMuted));
+            muteBtn.setAttribute("aria-label", nextMuted ? "Unmute video" : "Mute video");
+            video.play().catch(() => {});
+        });
+    }
 
-    new IntersectionObserver((entries) => {
+    let loaded = false;
+    new IntersectionObserver((entries, obs) => {
         entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                player.play().catch(() => {});
-            } else {
-                player.pause().catch(() => {});
+            if (!entry.isIntersecting) return;
+            if (!loaded) {
+                loaded = true;
+                source.src = source.dataset.src;
+                video.preload = "auto";
+                video.load();
+                obs.disconnect();
+
+                new IntersectionObserver((es) => {
+                    es.forEach((e) => {
+                        if (e.isIntersecting) {
+                            video.play().catch(() => {});
+                        } else {
+                            video.pause();
+                        }
+                    });
+                }, { threshold: 0.25 }).observe(video);
+
+                video.play().catch(() => {});
             }
         });
-    }, { threshold: 0.25 }).observe(iframe);
+    }, { rootMargin: "400px 0px" }).observe(cover);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
