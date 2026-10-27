@@ -408,7 +408,13 @@ document.getElementById("newsletterForm").addEventListener("submit", async (e) =
                 <div class="insights-card insights-card-video">
                     <div class="insights-card-inner">
                         <div class="vimeo-cover">
-                            <iframe src="https://player.vimeo.com/video/1189319558?autoplay=0&muted=1&loop=1&background=1&autopause=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Development Insights"></iframe>
+                            <video class="insights-video-el" preload="none" muted loop playsinline aria-label="Development Insights">
+                                <source data-src="videos/oaksliving_avatar.mp4" type="video/mp4">
+                            </video>
+                            <button class="vimeo-mute-btn" type="button" aria-label="Unmute video" aria-pressed="true">
+                                <svg class="vimeo-mute-icon vimeo-icon-muted" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.03-3.76l-1.09 1.09A3 3 0 0 1 15 12a3 3 0 0 1-.62 1.83L13.3 15l1.17 1.17A4.5 4.5 0 0 0 16.5 12zm3.03-7.03L18.46 3.9 15.44 6.93A7.47 7.47 0 0 0 12 6V3.23l-1.59 1.59L12 6.4V8l3.6 3.6 1.4 1.4L19.07 15l1.11 1.11a7.47 7.47 0 0 0 1.32-4.11c0-2.07-.84-3.94-2.2-5.3l1.23-1.23-1.0-1.0z"/><path d="M4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25a7.52 7.52 0 0 1-1.78.75v2.06a9.5 9.5 0 0 0 3.21-1.36L19.73 21 21 19.73 4.27 3z"/></svg>
+                                <svg class="vimeo-mute-icon vimeo-icon-unmuted" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05a4.5 4.5 0 0 0 2.5-4.02zM14 3.23v2.06a7.5 7.5 0 0 1 0 13.42v2.06a9.5 9.5 0 0 0 0-17.54z"/></svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -489,7 +495,6 @@ document.getElementById("newsletterForm").addEventListener("submit", async (e) =
         <span class="scroll-arrow">↑</span>
     </button>
 
-    <script src="https://player.vimeo.com/api/player.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="script.js" defer></script>
