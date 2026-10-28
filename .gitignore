@@ -1,0 +1,21 @@
+
+# Lightsail deployment SSH credentials
+lightsail_deploy
+lightsail_deploy.pub
+known_hosts_deploy
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Logs
+*.log
