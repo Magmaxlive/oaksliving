@@ -288,6 +288,12 @@
   border-color: #cddcff;
 }
 
+.portfolio-listing-page .status-selling {
+  color: #0a3d91;
+  background: #eaf1ff;
+  border-color: #cddcff;
+}
+
 /* Portfolio Card — horizontal side-by-side layout (image left, text right) */
 .portfolio-listing-page .portfolio-grid {
   display: flex;
@@ -356,6 +362,11 @@
 
 .portfolio-listing-page .portfolio-card-body .status-new-release {
   background: #145e38;
+  color: #ffffff;
+}
+
+.portfolio-listing-page .portfolio-card-body .status-selling {
+  background: #0a3d91;
   color: #ffffff;
 }
 
