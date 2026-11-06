@@ -763,6 +763,81 @@
   background: #000;
 }
 
+/* Custom Vimeo controls (video + container sized inline) */
+.custom-vimeo-bigplay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.25s ease;
+}
+.custom-vimeo-bigplay svg {
+  width: 32px;
+  height: 32px;
+  margin-left: 4px;
+  padding: 18px;
+  border-radius: 50%;
+  background: rgba(14, 26, 43, 0.75);
+  box-sizing: content-box;
+}
+.custom-vimeo:not(.is-paused) .custom-vimeo-bigplay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.custom-vimeo-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px 14px 10px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: auto;
+}
+.custom-vimeo:hover .custom-vimeo-controls,
+.custom-vimeo:focus-within .custom-vimeo-controls {
+  opacity: 1;
+}
+
+.custom-vimeo-spacer { flex: 1; }
+
+.custom-vimeo-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+.custom-vimeo-btn svg { width: 20px; height: 20px; }
+.custom-vimeo-btn:hover { color: #c9a96e; }
+
+.custom-vimeo-play .icon-pause { display: none; }
+.custom-vimeo-mute .icon-vol-off { display: none; }
+.custom-vimeo.is-paused .custom-vimeo-play .icon-play { display: block; }
+.custom-vimeo.is-paused .custom-vimeo-play .icon-pause { display: none; }
+.custom-vimeo:not(.is-paused) .custom-vimeo-play .icon-play { display: none; }
+.custom-vimeo:not(.is-paused) .custom-vimeo-play .icon-pause { display: block; }
+.custom-vimeo.is-muted .custom-vimeo-mute .icon-vol-on { display: none; }
+.custom-vimeo.is-muted .custom-vimeo-mute .icon-vol-off { display: block; }
+
 .project-detail-layout .construction-progress-body {
   padding: 1rem 1.1rem 1.2rem;
 }

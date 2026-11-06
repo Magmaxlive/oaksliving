@@ -681,6 +681,55 @@ function initVimeoBackground() {
     }
 }
 
+// Custom Vimeo player — background mode + play/mute/fullscreen overlay
+function initCustomVimeoPlayers() {
+    const roots = document.querySelectorAll(".custom-vimeo");
+    if (!roots.length || !window.Vimeo || !window.Vimeo.Player) return;
+
+    roots.forEach((root) => {
+        const iframe = root.querySelector(".custom-vimeo-frame");
+        const bigPlay = root.querySelector(".custom-vimeo-bigplay");
+        const playBtn = root.querySelector(".custom-vimeo-play");
+        const muteBtn = root.querySelector(".custom-vimeo-mute");
+        const fsBtn = root.querySelector(".custom-vimeo-fullscreen");
+        if (!iframe) return;
+
+        const player = new window.Vimeo.Player(iframe);
+        let paused = true;
+        let muted = true;
+
+        root.classList.add("is-muted", "is-paused");
+
+        player.on("play", () => { paused = false; root.classList.remove("is-paused"); });
+        player.on("pause", () => { paused = true; root.classList.add("is-paused"); });
+        player.on("ended", () => { paused = true; root.classList.add("is-paused"); });
+
+        const togglePlay = () => {
+            if (paused) player.play().catch(() => {});
+            else player.pause().catch(() => {});
+        };
+
+        if (bigPlay) bigPlay.addEventListener("click", togglePlay);
+        if (playBtn) playBtn.addEventListener("click", togglePlay);
+
+        if (muteBtn) {
+            muteBtn.addEventListener("click", () => {
+                muted = !muted;
+                player.setMuted(muted).catch(() => {});
+                if (!muted) player.setVolume(1).catch(() => {});
+                root.classList.toggle("is-muted", muted);
+                muteBtn.setAttribute("aria-label", muted ? "Unmute" : "Mute");
+            });
+        }
+
+        if (fsBtn) {
+            fsBtn.addEventListener("click", () => {
+                player.requestFullscreen().catch(() => {});
+            });
+        }
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     initializeVideo();
 });
@@ -693,6 +742,7 @@ window.addEventListener("load", () => {
     }
     initializeLazyVideos();
     initVimeoBackground();
+    initCustomVimeoPlayers();
 });
 
 // Ultra-clean hover effects
