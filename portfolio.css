@@ -81,6 +81,18 @@
   z-index: 1;
 }
 
+.portfolio-listing-page .project-hero-bg iframe,
+.project-detail-layout .project-hero-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100cqw, calc(100cqh * 16 / 9));
+  height: max(100cqh, calc(100cqw * 9 / 16));
+  border: 0;
+  pointer-events: none;
+}
+
 .portfolio-listing-page .hero-overlay,
 .project-detail-layout .hero-overlay {
   position: absolute;

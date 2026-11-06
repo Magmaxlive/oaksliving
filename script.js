@@ -631,50 +631,54 @@ function initializeLazyVideos() {
     lazyVideos.forEach((v) => observer.observe(v));
 }
 
-// Insights section video — native <video> with lazy load + custom mute toggle
+// Insights section video — Vimeo iframe with lazy load + custom mute toggle
 function initVimeoBackground() {
     const cover = document.querySelector(".insights-card-video .vimeo-cover");
-    const video = cover && cover.querySelector(".insights-video-el");
-    const source = video && video.querySelector("source[data-src]");
-    if (!cover || !video || !source) return;
+    const iframe = cover && cover.querySelector("#insights-vimeo");
+    if (!cover || !iframe || !iframe.dataset.src) return;
 
     const muteBtn = cover.querySelector(".vimeo-mute-btn");
-    if (muteBtn) {
-        muteBtn.addEventListener("click", () => {
-            const nextMuted = !video.muted;
-            video.muted = nextMuted;
-            if (!nextMuted) video.volume = 1;
-            muteBtn.setAttribute("aria-pressed", String(nextMuted));
-            muteBtn.setAttribute("aria-label", nextMuted ? "Unmute video" : "Mute video");
-            video.play().catch(() => {});
-        });
-    }
+    let player = null;
+    let muted = true;
 
     let loaded = false;
     new IntersectionObserver((entries, obs) => {
         entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            if (!loaded) {
-                loaded = true;
-                source.src = source.dataset.src;
-                video.preload = "auto";
-                video.load();
-                obs.disconnect();
+            if (!entry.isIntersecting || loaded) return;
+            loaded = true;
+            iframe.src = iframe.dataset.src;
+            obs.disconnect();
 
-                new IntersectionObserver((es) => {
-                    es.forEach((e) => {
-                        if (e.isIntersecting) {
-                            video.play().catch(() => {});
-                        } else {
-                            video.pause();
-                        }
-                    });
-                }, { threshold: 0.25 }).observe(video);
+            if (!window.Vimeo || !window.Vimeo.Player) return;
+            player = new window.Vimeo.Player(iframe);
+            player.setMuted(true).catch(() => {});
+            player.setLoop(true).catch(() => {});
+            player.play().catch(() => {});
 
-                video.play().catch(() => {});
-            }
+            new IntersectionObserver((es) => {
+                es.forEach((e) => {
+                    if (!player) return;
+                    if (e.isIntersecting) {
+                        player.play().catch(() => {});
+                    } else {
+                        player.pause().catch(() => {});
+                    }
+                });
+            }, { threshold: 0.25 }).observe(iframe);
         });
     }, { rootMargin: "400px 0px" }).observe(cover);
+
+    if (muteBtn) {
+        muteBtn.addEventListener("click", () => {
+            if (!player) return;
+            muted = !muted;
+            player.setMuted(muted).catch(() => {});
+            if (!muted) player.setVolume(1).catch(() => {});
+            muteBtn.setAttribute("aria-pressed", String(muted));
+            muteBtn.setAttribute("aria-label", muted ? "Unmute video" : "Mute video");
+            player.play().catch(() => {});
+        });
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
