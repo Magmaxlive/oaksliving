@@ -3540,11 +3540,61 @@ b,
     border: 0;
 }
 
+.vimeo-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+}
+.vimeo-cover.is-playing .vimeo-poster {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.vimeo-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(14, 26, 43, 0.75);
+    color: #fff;
+    cursor: pointer;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease, opacity 0.25s ease;
+}
+.vimeo-play-btn:hover {
+    background: rgba(14, 26, 43, 0.95);
+    transform: translate(-50%, -50%) scale(1.06);
+}
+.vimeo-play-btn svg {
+    width: 32px;
+    height: 32px;
+    margin-left: 4px;
+}
+.vimeo-cover.is-playing .vimeo-play-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.vimeo-cover:not(.is-playing) .vimeo-mute-btn {
+    display: none;
+}
+
 .vimeo-mute-btn {
     position: absolute;
     bottom: 14px;
     right: 14px;
-    z-index: 2;
+    z-index: 4;
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -3614,6 +3664,89 @@ b,
     padding: 20px 24px 24px;
     flex: 1;
     min-height: 260px;
+}
+
+/* Hide Elfsight free-tier watermark (targeted — avoid breaking post links) */
+#instagram-feed-placeholder a[href*="elfsight.com"] {
+    display: none !important;
+}
+
+.insights-ig-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    padding: 40px 32px;
+    gap: 10px;
+}
+.insights-ig-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-bottom: 8px;
+    box-shadow: 0 10px 24px rgba(220, 39, 67, 0.25);
+    transition: transform 0.25s ease;
+}
+.insights-ig-cta:hover .insights-ig-icon {
+    transform: scale(1.05);
+}
+.insights-ig-icon svg {
+    width: 38px;
+    height: 38px;
+}
+.insights-ig-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #64748b;
+}
+.insights-ig-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+    line-height: 1.3;
+}
+.insights-ig-handle {
+    font-size: 1rem;
+    color: #c9a96e;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.01em;
+}
+.insights-ig-desc {
+    font-size: 0.92rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin: 4px 0 18px;
+    max-width: 320px;
+}
+.insights-ig-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #1a1a2e;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 999px;
+    transition: background 0.2s ease, transform 0.2s ease;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+}
+.insights-ig-cta:hover .insights-ig-btn {
+    background: #c9a96e;
+    transform: translateY(-2px);
 }
 
 @media (max-width: 900px) {
