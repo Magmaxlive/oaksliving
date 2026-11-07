@@ -631,42 +631,32 @@ function initializeLazyVideos() {
     lazyVideos.forEach((v) => observer.observe(v));
 }
 
-// Insights section video — Vimeo iframe with lazy load + custom mute toggle
+// Insights section video — Vimeo iframe, click-to-play with poster + mute toggle
 function initVimeoBackground() {
     const cover = document.querySelector(".insights-card-video .vimeo-cover");
     const iframe = cover && cover.querySelector("#insights-vimeo");
     if (!cover || !iframe || !iframe.dataset.src) return;
 
+    const playBtn = cover.querySelector(".vimeo-play-btn");
     const muteBtn = cover.querySelector(".vimeo-mute-btn");
     let player = null;
     let muted = true;
 
-    let loaded = false;
-    new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-            if (!entry.isIntersecting || loaded) return;
-            loaded = true;
-            iframe.src = iframe.dataset.src;
-            obs.disconnect();
-
-            if (!window.Vimeo || !window.Vimeo.Player) return;
-            player = new window.Vimeo.Player(iframe);
-            player.setMuted(true).catch(() => {});
-            player.setLoop(true).catch(() => {});
+    const startPlayback = () => {
+        if (player) {
             player.play().catch(() => {});
+            return;
+        }
+        iframe.src = iframe.dataset.src;
+        if (!window.Vimeo || !window.Vimeo.Player) return;
+        player = new window.Vimeo.Player(iframe);
+        player.on("play", () => cover.classList.add("is-playing"));
+        player.on("pause", () => {});
+        player.setMuted(true).catch(() => {});
+        player.play().catch(() => {});
+    };
 
-            new IntersectionObserver((es) => {
-                es.forEach((e) => {
-                    if (!player) return;
-                    if (e.isIntersecting) {
-                        player.play().catch(() => {});
-                    } else {
-                        player.pause().catch(() => {});
-                    }
-                });
-            }, { threshold: 0.25 }).observe(iframe);
-        });
-    }, { rootMargin: "400px 0px" }).observe(cover);
+    if (playBtn) playBtn.addEventListener("click", startPlayback);
 
     if (muteBtn) {
         muteBtn.addEventListener("click", () => {
@@ -676,7 +666,6 @@ function initVimeoBackground() {
             if (!muted) player.setVolume(1).catch(() => {});
             muteBtn.setAttribute("aria-pressed", String(muted));
             muteBtn.setAttribute("aria-label", muted ? "Unmute video" : "Mute video");
-            player.play().catch(() => {});
         });
     }
 }
